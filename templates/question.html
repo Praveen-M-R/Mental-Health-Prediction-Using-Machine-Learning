@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('static/question.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .progress-bar-container {
+            width: 58%;
+            margin: 1px 0;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color:rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            height: 5px;
+        }
+        .progress {
+            height: 5px;
+            background-color: #4CAF50;
+            width: {{ progress_percentage }}%;
+            border-radius: 5px;
+        }
+        .question-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            width: 700px; /* Add some space between question and options */
+        }
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            border-radius: 10px;
+        }
+        .btn:hover {
+            background-color: #e8533f;
+        }
+        .options-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: skyblue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #e8533f;
+        }
+        .predict-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .predict-button:hover {
+            background-color: #e8533f;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar-container">
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+    <form method="POST" action="">
+        <div class="question-container">
+            <button type="submit" name="back" class="back-button">
+                <img src="static/back.png" alt="Back" width="30" height="30">
+            </button>
+            <div class="question">{{ question['question'] }}</div>
+            {% if question['type'] == 'number' %}
+            <input type="number" name="answer" min="4" max="100" required oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Age must be greater than 4  and less than 100')">
+            <button type="submit" class="btn">Next</button>
+            {% endif %}
+        </div>
+        {% if question['type'] == 'multiple_choice' %}
+            <div class="options-container">
+                {% for option in question['options'] %}
+                    <button type="submit" name="answer" value="{{ option }}" class="btn">{{ option }}</button>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if session['question_index'] == questions|length - 1 %}
+            <button type="submit" class="predict-button">Predict</button>
+        {% endif %}
+    </form>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('static/result.jpg');
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 80%;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #495057;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            width: 100%;
+        }
+
+        select:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        .result-box {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        .result-box p {
+            color: #495057;
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px 0; /* Adds space above and below the button */
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="post" action="/predict">
+            <label for="model">Select Model:</label>
+            <select name="model" id="model" onchange="this.form.submit()">
+                {% for model in models %}
+                    <option value="{{ model }}" {% if model == selected_model %}selected{% endif %}>{{ model }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        
+
+        <div class="result-box">
+            <h1>Prediction Result</h1>
+            <p><strong>{{ prediction }}</strong> </p>
+            <!--<p><strong>answers:</strong> {{ answers }}</p>-->
+            {% if prediction == "Attention-Deficit/Hyperactivity Disorder (ADHD)" %}
+            <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>ADHD is a neurodevelopmental disorder is characterized by persistent patterns of inattention, hyperactivity, and impulsivity.<br>
+            <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Treatment may include behavioral therapy, medication, and lifestyle changes.<br>
+            <a href="https://www.nimh.nih.gov/health/topics/attention-deficit-hyperactivity-disorder-adhd"> <bold>View More Infomation about this disorder here</bold></a></p>
+           
+        {% elif prediction == "Borderline Personality Disorder (BPD)" %}
+            <p ><strong style="color:rgb(13, 230, 60);">Description:</strong> Borderline personality disorder is a mental illness that severely impacts a person’s ability to manage their emotions<br>
+           <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Early intervention, therapy, and educational support can be helpful for individuals with BPD.<br>
+            <a href="https://www.nimh.nih.gov/health/topics/borderline-personality-disorder"> <bold>View More Infomation about this disorder here</bold></a></p>
+            
+        {% elif prediction == "Schizophrenia" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>Schizophrenia is a serious mental illness that affects how a person thinks, feels, and behaves. People with schizophrenia may seem like they have lost touch with reality<br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Treatment may include Antipsychotic medications, Psychosocial treatments, Coordinated specialty care etc..<br>
+                 <a href="https://www.nimh.nih.gov/health/topics/schizophrenia"> <bold>View More Infomation about this disorder here</bold></a></p>
+        {% elif prediction == "Major Depressive Disorder (Depression)" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong> Major Depressive Disorder (MDD) is a mood disorder characterized by persistent feelings of sadness and a lack of interest or pleasure in daily activities.<br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Treatment may include psychotherapy, medication, and lifestyle changes.<br>
+                 <a href="https://en.wikipedia.org/wiki/Major_depressive_disorder#:~:text=Major%20depressive%20disorder%20(MDD)%2C,pleasure%20in%20normally%20enjoyable%20activities"> <bold>View More Infomation about this disorder here</bold></a></p>
+        {% elif prediction == "Obsessive-Compulsive Disorder (OCD)" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong> Obsessive-Compulsive Disorder (OCD) is a mental health condition characterized by persistent, unwanted, and intrusive thoughts (obsessions) and repetitive behaviors (compulsions).<br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Cognitive-behavioral therapy (CBT) and medication can be effective in managing OCD.<br>
+                <a href="https://www.nimh.nih.gov/health/topics/obsessive-compulsive-disorder-ocd#:~:text=Obsessive%2Dcompulsive%20disorder%20(OCD),or%20interfere%20with%20daily%20life"> <bold>View More Infomation about this disorder here</bold></a></p>
+        {% elif prediction == "Seasonal Affective Disorder (SAD)" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>SAD is a type of depression characterized by a recurrent seasonal pattern<br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Light therapy and vitamin D are treatments for winter-pattern SAD, whereas psychotherapy and antidepressants are used to treat depression in general<br>
+                <a href="https://en.wikipedia.org/wiki/Pervasive_developmental_disorder"> <bold>View More Infomation about this disorder here</bold></a></p> 
+        {% elif prediction == "Post-Traumatic Stress Disorder (PTSD)" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>Post-Traumatic Stress Disorder (PTSD) is a mental health condition that can<br></br> develop after exposure to a traumatic event.<br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Treatment often involves psychotherapy, medication, and support from mental health professionals.<br>
+                <a href="https://www.nimh.nih.gov/health/topics/post-traumatic-stress-disorder-ptsd#:~:text=Post%2Dtraumatic%20stress%20disorder%20(PTSD)%20is%20a%20disorder%20that,or%20respond%20to%20potential%20danger"> <bold>View More Infomation about this disorder here</bold></a></p> 
+        {% elif prediction == "Generalized Anxiety Disorder (GAD)" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>Anxiety disorders involve excessive worry, fear, or nervousness and can interfere with daily functioning..<br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Therapies, lifestyle changes, and medication can be part of anxiety disorder treatment..<br>
+                <a href="https://medlineplus.gov/anxiety.html"> <bold>View More Infomation about this disorder here</bold></a></p> 
+        {% elif prediction == "Bipolar Disorder"%}
+                    <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>Bipolar Disorder is a mood disorder characterized by episodes of depression and mania, or high energy and activity levels.<br>
+                    <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Medication and psychotherapy are often used to manage bipolar disorder..<br>
+                    <a href="https://www.nimh.nih.gov/health/topics/bipolar-disorder#:~:text=Bipolar%20disorder%20(formerly%20called%20manic,day%2Dto%2Dday%20tasks"> <bold>View More Infomation about this disorder here</bold></a></p> 
+        {% elif prediction == "Social Anxiety Disorder" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>Social anxiety disorder is a common type of anxiety disorder. A person with social anxiety disorder feels symptoms of anxiety or fear in situations where they may be scrutinized, evaluated, or judged by others<br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Antidepressant medication and Anti-anxiety medication are often used in treatment.<br>
+                <a href="https://www.nimh.nih.gov/health/publications/social-anxiety-disorder-more-than-just-shyness"> <bold>View More Infomation about this disorder here</bold></a></p> 
+        {% elif prediction == "Panic Disorder" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>People with panic disorder have frequent and unexpected panic attacks. These attacks are characterized by a sudden wave of fear or discomfort or a sense of losing control even when there is no clear danger or trigger.<br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Panic disorder is generally treated with psychotherapy (sometimes called “talk therapy”), medication, or both<br>
+                <a href="https://www.nimh.nih.gov/health/publications/panic-disorder-when-fear-overwhelms"> <bold>View More Infomation about this disorder here</bold></a></p>     
+        {% elif prediction == "Generalized Anxiety Disorder (GAD), Major Depressive Disorder (Depression)" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>People with panic disorder have frequent and unexpected panic attacks. These attacks are characterized by a sudden wave of fear or discomfort or a sense of losing control even when there is no clear danger or trigger.<br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Panic disorder is generally treated with psychotherapy (sometimes called “talk therapy”), medication, or both<br>
+                <a href="https://www.nimh.nih.gov/health/publications/panic-disorder-when-fear-overwhelms"> <bold>View More Infomation about this disorder here</bold></a></p>     
+                {% elif prediction == "Panic Disorder, Post-Traumatic Stress Disorder (PTSD)" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>People with panic disorder have frequent and unexpected panic attacks. These attacks are characterized by a sudden wave of fear or discomfort or a sense of losing control even when there is no clear danger or trigger.<br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Panic disorder is generally treated with psychotherapy (sometimes called “talk therapy”), medication, or both<br>
+                <a href="https://www.nimh.nih.gov/health/publications/panic-disorder-when-fear-overwhelms"> <bold>View More Infomation about this disorder here</bold></a></p>     
+        {% endif %}
+        </div>
+        <form action="{{ url_for('home') }}" method="get">
+            <button type="submit" class="button">Go Back Home</button>
+        </form>
+    </div>
+</body>
+</html>

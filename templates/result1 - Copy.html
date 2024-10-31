@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            background-color: #f0f0f0; /* Optional: adds a light background color */
+            background-image: url('static/result.jpg');
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.977);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px 0; /* Adds space above and below the button */
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color:blue;"> {{ prediction }}</h1>
+        <p>{{answers}}</p>
+        {% if prediction == "ADHD" %}
+            <p ><strong style="color:rgb(13, 230, 60);">Description:</strong> Attention Deficit Hyperactivity Disorder (ADHD) is a neurodevelopmental disorder<br></br> characterized by persistent patterns of inattention, hyperactivity, and impulsivity.<br></br>
+            <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Treatment may include behavioral therapy, medication, and lifestyle changes.<br></br>
+            <a href="https://www.nimh.nih.gov/health/topics/attention-deficit-hyperactivity-disorder-adhd"> <bold>View More Infomation about this disorder here</bold></a></p>
+           
+        {% elif prediction == "ASD" %}
+            <p ><strong style="color:rgb(13, 230, 60);">Description:</strong> Autism Spectrum Disorder (ASD) is a complex neurodevelopmental disorder that affects social interaction, communication, and behavior.<br></br>
+           <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Early intervention, therapy, and educational support can be helpful for individuals with ASD.<br></br>
+            <a href="https://www.nimh.nih.gov/health/topics/autism-spectrum-disorders-asd"> <bold>View More Infomation about this disorder here</bold></a></p>
+            
+        {% elif prediction == "Loneliness" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong> Loneliness is a subjective feeling of social isolation and a lack of meaningful connections with others.<br></br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Building social connections, seeking support, and engaging in social activities can help alleviate loneliness.<br></br>
+                 <a href="https://www.verywellmind.com/loneliness-causes-effects-and-treatments-2795749#:~:text=While%20common%20definitions%20of%20loneliness,to%20form%20connections%20with%20others."> <bold>View More Infomation about this disorder here</bold></a></p>
+        {% elif prediction == "MDD" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong> Major Depressive Disorder (MDD) is a mood disorder characterized by persistent feelings of sadness and a lack of interest or pleasure in daily activities.<br></br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Treatment may include psychotherapy, medication, and lifestyle changes.<br></br>
+                 <a href="https://en.wikipedia.org/wiki/Major_depressive_disorder#:~:text=Major%20depressive%20disorder%20(MDD)%2C,pleasure%20in%20normally%20enjoyable%20activities"> <bold>View More Infomation about this disorder here</bold></a></p>
+        {% elif prediction == "OCD" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong> Obsessive-Compulsive Disorder (OCD) is a mental health condition characterized by<br></br> persistent, unwanted, and intrusive thoughts (obsessions) and repetitive behaviors (compulsions).<br></br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Cognitive-behavioral therapy (CBT) and medication can be effective in managing OCD.<br></br>
+                <a href="https://www.nimh.nih.gov/health/topics/obsessive-compulsive-disorder-ocd#:~:text=Obsessive%2Dcompulsive%20disorder%20(OCD),or%20interfere%20with%20daily%20life"> <bold>View More Infomation about this disorder here</bold></a></p>
+        {% elif prediction == "PDD" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong> Pervasive Developmental Disorders (PDD) refer to a group of conditions that include autism<br></br> and other developmental disorders.<br></br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Individualized treatment plans and therapies can be beneficial for individuals with PDD.<br></br>
+                <a href="https://en.wikipedia.org/wiki/Pervasive_developmental_disorder"> <bold>View More Infomation about this disorder here</bold></a></p> 
+        {% elif prediction == "PTSD" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>Post-Traumatic Stress Disorder (PTSD) is a mental health condition that can<br></br> develop after exposure to a traumatic event.<br></br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Treatment often involves psychotherapy, medication, and support from mental health professionals.<br></br>
+                <a href="https://www.nimh.nih.gov/health/topics/post-traumatic-stress-disorder-ptsd#:~:text=Post%2Dtraumatic%20stress%20disorder%20(PTSD)%20is%20a%20disorder%20that,or%20respond%20to%20potential%20danger"> <bold>View More Infomation about this disorder here</bold></a></p> 
+        {% elif prediction == "Anxiety" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>Anxiety disorders involve excessive worry, fear, or nervousness and can interfere with daily functioning..<br></br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Therapies, lifestyle changes, and medication can be part of anxiety disorder treatment..<br></br>
+                <a href="https://medlineplus.gov/anxiety.html"> <bold>View More Infomation about this disorder here</bold></a></p> 
+        {% elif prediction == "Bipolar" %}
+                    <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>Bipolar Disorder is a mood disorder characterized by episodes of depression and mania,<br></br> or high energy and activity levels.<br></br>
+                    <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Medication and psychotherapy are often used to manage bipolar disorder..<br></br>
+                    <a href="https://www.nimh.nih.gov/health/topics/bipolar-disorder#:~:text=Bipolar%20disorder%20(formerly%20called%20manic,day%2Dto%2Dday%20tasks"> <bold>View More Infomation about this disorder here</bold></a></p> 
+        {% elif prediction == "Eating disorder" %}
+                    <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>Eating disorders, such as anorexia and bulimia,<br></br> involve unhealthy eating behaviors and attitudes about food and weight<br></br>
+                    <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Treatment may include nutritional counseling, therapy, and medical monitoring.<br></br>
+                    <a href="https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/behaviours/eating-disorders/overview/#:~:text=An%20eating%20disorder%20is%20a,your%20weight%20or%20body%20shape"> <bold>View More Infomation about this disorder here</bold></a></p> 
+        {% elif prediction == "Psychotic depression" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>Psychotic Depression is a severe form of depression with <br></br>added psychotic symptoms like delusions and hallucinations.<br></br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Antidepressant medication and antipsychotic medication are often used in treatment.<br></br>
+                <a href="https://www.nhs.uk/mental-health/conditions/psychotic-depression"> <bold>View More Infomation about this disorder here</bold></a></p> 
+        {% elif prediction == "Sleeping disorder" %}
+                <p ><strong style="color:rgb(13, 230, 60);">Description:</strong>Sleeping disorders include conditions like insomnia and<br></br> sleep apnea that disrupt normal sleep patterns<br></br>
+                <strong style="color:rgb(194, 85, 21);">Recommendations:</strong>Treatment may involve lifestyle changes, therapy, and in some cases, medication<br></br>
+                <a href="https://www.psychiatry.org/patients-families/sleep-disorders/what-are-sleep-disorders#:~:text=Sleep%20disorders%20(or%20sleep%2Dwake,%2C%20anxiety%2C%20or%20cognitive%20disorders"> <bold>View More Infomation about this disorder here</bold></a></p>     
+        {% endif %}
+        <form action="{{ url_for('home') }}" method="get">
+            <button type="submit" class="button">Go BackHome</button>
+        </form>
+    </div>
+</body>
+</html>
